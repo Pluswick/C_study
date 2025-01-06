@@ -1,3 +1,5 @@
+#include<stdio.h>
+#include<string.h>
 #include"functions.h"
 
 void add(double num1, double num2, char history[][50], int* history_count) {

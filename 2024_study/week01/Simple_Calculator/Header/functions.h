@@ -1,7 +1,5 @@
 #ifndef FUNCTIONS_H
-
-#include <stdio.h>
-#include <string.h>
+#define FUNCTIONS_H
 
 #define MAX_HISTORY 100
 
