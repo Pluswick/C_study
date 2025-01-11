@@ -1,54 +1,43 @@
-#include<stdio.h>
-#include<string.h>
-#include "functions.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "student.h"
 
 int main() {
+    Student students[MAX_STUDENTS];
+    int count = 0;
     int choice;
-    double num1, num2;
-    char history[MAX_HISTORY][50];
-    int history_count = 0;
 
+    // 메뉴 루프
     while (1) {
-        printf("\nSimple Calculator\n");
-        printf("Enter two numbers: ");
-        scanf("%lf %lf", &num1, &num2);
-
-        printf("\nSelect an operation:\n");
-        printf("1. Addition\n");
-        printf("2. Subtraction\n");
-        printf("3. Multiplication\n");
-        printf("4. Division (Quotient and Remainder)\n");
-        printf("5. View History\n");
-        printf("6. Exit\n");
+        printf("\nStudent Performance Management System\n");
+        printf("1. Add Student\n");
+        printf("2. Display Students\n");
+        printf("3. Save to File\n");
+        printf("4. Load from File\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
         case 1:
-            add(num1, num2, history, &history_count);
+            addStudent(students, &count);
             break;
         case 2:
-            subtract(num1, num2, history, &history_count);
+            displayStudents(students, count);
             break;
         case 3:
-            multiply(num1, num2, history, &history_count);
+            saveToFile(students, count, "students.txt");
             break;
         case 4:
-            if ((int)num2 == 0) {
-                printf("Error: Division by zero is not allowed.\n");
-            }
-            else {
-                divide((int)num1, (int)num2, history, &history_count);
-            }
+            loadFromFile(students, &count, "students.txt");
             break;
         case 5:
-            view_history(history, history_count);
-            break;
-        case 6:
-            printf("Exiting the program.\n");
+            printf("Exiting program. Goodbye!\n");
             return 0;
         default:
             printf("Invalid choice. Please try again.\n");
         }
     }
+
+    return 0;
 }

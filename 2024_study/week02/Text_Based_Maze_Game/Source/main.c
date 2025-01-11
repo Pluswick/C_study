@@ -1,54 +1,33 @@
-#include<stdio.h>
-#include<string.h>
-#include "functions.h"
+#include <stdio.h>
+#include "maze.h"
 
 int main() {
-    int choice;
-    double num1, num2;
-    char history[MAX_HISTORY][50];
-    int history_count = 0;
+    char maze[ROWS][COLS];
+    Player player = { 4, 0 }; // 시작 위치 (S)
+
+    initializeMaze(maze);
+
+    printf("Welcome to the Text-Based Maze Game!\n");
+    printf("Use 'w' (up), 's' (down), 'a' (left), 'd' (right) to move.\n");
+    printf("Reach 'E' to exit the maze. Good luck!\n");
 
     while (1) {
-        printf("\nSimple Calculator\n");
-        printf("Enter two numbers: ");
-        scanf("%lf %lf", &num1, &num2);
+        displayMaze(maze, player);
 
-        printf("\nSelect an operation:\n");
-        printf("1. Addition\n");
-        printf("2. Subtraction\n");
-        printf("3. Multiplication\n");
-        printf("4. Division (Quotient and Remainder)\n");
-        printf("5. View History\n");
-        printf("6. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        // 사용자 입력
+        char move;
+        printf("\nEnter your move: ");
+        scanf(" %c", &move);
 
-        switch (choice) {
-        case 1:
-            add(num1, num2, history, &history_count);
+        // 플레이어 이동
+        movePlayer(maze, &player, move);
+
+        // 출구 도달 확인
+        if (isExitReached(player)) {
+            printf("\nCongratulations! You reached the exit!\n");
             break;
-        case 2:
-            subtract(num1, num2, history, &history_count);
-            break;
-        case 3:
-            multiply(num1, num2, history, &history_count);
-            break;
-        case 4:
-            if ((int)num2 == 0) {
-                printf("Error: Division by zero is not allowed.\n");
-            }
-            else {
-                divide((int)num1, (int)num2, history, &history_count);
-            }
-            break;
-        case 5:
-            view_history(history, history_count);
-            break;
-        case 6:
-            printf("Exiting the program.\n");
-            return 0;
-        default:
-            printf("Invalid choice. Please try again.\n");
         }
     }
+
+    return 0;
 }
