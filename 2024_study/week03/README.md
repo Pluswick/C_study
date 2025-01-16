@@ -2,7 +2,7 @@
 ### Pick and build at least one out of the three presented project topics.
 ---
 # Features, Concepts, Expansions and Learning Objectives
----
+
 ## 1. Linked List-Based Schedule Management Program
 
 - **Features:**
